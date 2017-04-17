@@ -28,6 +28,8 @@ BEGIN {
 
 __END__
 
+=pod
+
 =head1 SYNOPSIS
 
   use DBIx::Simple::Interpol;
