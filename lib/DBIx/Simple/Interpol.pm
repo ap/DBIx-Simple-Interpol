@@ -1,23 +1,11 @@
-use 5.006;
-use strict;
-no warnings;
+use 5.006; use strict; no warnings;
 
 package DBIx::Simple::Interpol;
 
 # ABSTRACT: monkey-patch DBIx::Simple to use SQL::Interpol
 
-BEGIN {
-	require SQL::Interpol;
-	require DBIx::Simple;
-	die 'Cannot find method to patch' if not DBIx::Simple->can( 'iquery' );
-	*DBIx::Simple::iquery = sub {
-		use warnings; # limited scope to avoid "Subroutine redefined"
-		my $self = shift;
-		my $p = SQL::Interpol::Parser->new;
-		my $sql = $p->parse( @_ );
-		return $self->query( $sql, @{ $p->bind } );
-	};
-}
+use SQL::Interpol ();
+use DBIx::Simple ();
 
 sub import {
 	shift;
@@ -26,7 +14,16 @@ sub import {
 	&$sub;
 }
 
-1;
+sub iquery {
+	my $self = shift;
+	my $p = SQL::Interpol::Parser->new;
+	my $sql = $p->parse( @_ );
+	$self->query( $sql, @{ $p->bind } );
+}
+
+die 'Cannot find method to patch' if not DBIx::Simple->can( 'iquery' );
+
+do { no warnings 'redefine'; *DBIx::Simple::iquery = \&iquery };
 
 __END__
 
