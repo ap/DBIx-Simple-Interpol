@@ -2,7 +2,7 @@ use 5.006; use strict; no warnings;
 
 package DBIx::Simple::Interpol;
 
-# ABSTRACT: monkey-patch DBIx::Simple to use SQL::Interpol
+our $VERSION = '1.005';
 
 use SQL::Interpol ();
 use DBIx::Simple ();
@@ -27,6 +27,14 @@ do { no warnings 'redefine'; *DBIx::Simple::iquery = \&iquery };
 
 __END__
 
+=pod
+
+=encoding UTF-8
+
+=head1 NAME
+
+DBIx::Simple::Interpol - monkey-patch DBIx::Simple to use SQL::Interpol
+
 =head1 SYNOPSIS
 
   use DBIx::Simple::Interpol;
@@ -48,3 +56,5 @@ But by loading this module instead (or after) L<DBIx::Simple>, the C<iquery>
 method will be patched to use L<SQL::Interpol> instead.
 
 This is all there is to this module.
+
+=cut
