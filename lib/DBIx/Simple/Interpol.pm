@@ -1,4 +1,4 @@
-use 5.006; use strict; no warnings;
+use 5.006; use strict; use warnings;
 
 package DBIx::Simple::Interpol;
 
