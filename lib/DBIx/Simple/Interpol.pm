@@ -2,7 +2,7 @@ use 5.006; use strict; no warnings;
 
 package DBIx::Simple::Interpol;
 
-our $VERSION = '1.005';
+our $VERSION = '1.006';
 
 use SQL::Interpol ();
 use DBIx::Simple ();
