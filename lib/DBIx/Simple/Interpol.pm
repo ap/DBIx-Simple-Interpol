@@ -6,11 +6,6 @@ package DBIx::Simple::Interpol;
 
 # ABSTRACT: monkey-patch DBIx::Simple to use SQL::Interpol
 
-use Exporter::Tidy _map => {
-	sql_interp => \&SQL::Interpol::sql_interp,
-	sql        => \&SQL::Interpol::sql,
-};
-
 BEGIN {
 	require SQL::Interpol;
 	require DBIx::Simple;
@@ -22,6 +17,13 @@ BEGIN {
 		my $sql = $p->parse( @_ );
 		return $self->query( $sql, @{ $p->bind } );
 	};
+}
+
+sub import {
+	shift;
+	my $prelude = sprintf qq'package %s;\n#line %d "%s"\n', ( caller )[0,2,1];
+	my $sub = eval qq{ sub { $prelude SQL::Interpol->import(\@_) } };
+	&$sub;
 }
 
 1;
