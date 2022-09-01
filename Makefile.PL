@@ -6,7 +6,7 @@ my $bt = q<https://rt.cpan.org/Public/Dist/Display.html?Name=DBIx-Simple-Interpo
 my %META = (
 	name        => 'DBIx-Simple-Interpol',
 	author      => 'Aristotle Pagaltzis <pagaltzis@gmx.de>',
-	x_copyright => { holder => 'Aristotle Pagaltzis', year => 2014 },
+	x_copyright => { holder => 'Aristotle Pagaltzis', year => 2022 },
 	license     => 'perl_5',
 	resources   => {
 		license    => [ 'http://dev.perl.org/licenses/' ],
